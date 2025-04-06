@@ -1,5 +1,6 @@
 import sys
 from random import choice, randint
+
 import pygame
 
 # Константы для размеров поля и сетки:
@@ -128,7 +129,7 @@ class Snake(GameObject):
         self.next_direction = None
 
     def draw(self):
-        """Метод отрисовки змейки на игровом поле."""
+        """Метод для отрисовки змейки на игровом поле."""
         for position in self.positions[1:]:
             self.draw_cell(position)
         # Отрисовка головы змейки
