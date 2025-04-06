@@ -68,11 +68,16 @@ class GameObject:
 class Apple(GameObject):
     """Класс, описывающий яблоко, и действия с ним."""
 
-    def __init__(self, color=APPLE_COLOR):
+    def __init__(self, color=APPLE_COLOR, occupied_cells=None):
         super().__init__(body_color=color)
+        if occupied_cells is None:
+            occupied_cells = []
+        self.randomize_position(occupied_cells)
 
     def randomize_position(self, occupied_cells=None):
         """Устанавливает случайное положение яблока на игровом поле."""
+        if occupied_cells is None:
+            occupied_cells = []
         while True:
             self.position = (randint(0, GRID_WIDTH - 1) * GRID_SIZE,
                              randint(0, GRID_HEIGHT - 1) * GRID_SIZE)
@@ -162,7 +167,7 @@ def main():
     # Инициализация PyGame:
     pygame.init()
     snake = Snake()
-    apple = Apple()
+    apple = Apple(occupied_cells=snake.positions)
 
     while True:
         clock.tick(SPEED)
